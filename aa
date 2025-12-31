@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Chakkara ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 22px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.line {
+  display: none;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 18px 0;
+  animation: fadeIn 1.4s ease forwards;
+}
+
+.big {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+  <div class="card">
+
+    <div class="line">
+      2025-il enikku ente jeevithathil kittiya ettavum valiya, ettavum best kaaryam nee aanu.
+    </div>
+
+    <div class="line">
+      2025 start cheyth time thenne ente lifil kittan patiya enee orikkalum replaceable allatha oru gift ann nee
+    </div>
+
+    <div class="line">
+      Enikku kittaan pattunnathinekkalum appuram aanu ninte presence.
+    </div>
+
+    <div class="line">Chila samayam njan chinthikkum…</div>
+
+    <div class="line">njan ninakku ottum perfect alla ennu.</div>
+
+    <div class="line">
+      Nee athrakk nalla oru innocent soul aan verum pavam aa,
+    </div>
+
+    <div class="line">
+      pinne nee enne ithra snehikkunnath kaanumbo
+    </div>
+
+    <div class="line">
+      ente ella imperfections-um perfect aakkanam enn oru strong aaya feeling varum.
+    </div>
+
+    <div class="line">Ath verum words alla…</div>
+
+    <div class="line">Njan try cheyyunnu, njan cheyyum.</div>
+
+    <div class="line big">🎆🎇 Happy New Year 🎇🎆</div>
+
+    <div class="line">🎆 ente chakkarak ❤️ 🎆</div>
+
+    <div class="line">🎇 umahh😘 🎇</div>
+
+  </div>
+</div>
+
+<script>
+const lines = document.querySelectorAll('.line');
+let i = 0;
+
+function showLine() {
+  if (i < lines.length) {
+    lines[i].style.display = 'block';
+
+    if (lines[i].innerText.includes('Happy New Year')) {
+      startFireworks();
+    }
+
+    i++;
+    setTimeout(showLine, 2300); // mobile-friendly reading time
+  }
+}
+showLine();
+
+// Fireworks animation (lightweight for phone)
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+let sparks = [];
+
+function startFireworks() {
+  setInterval(() => {
+    for (let j = 0; j < 40; j++) {
+      sparks.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height * 0.5,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 3,
+        dy: (Math.random() - 0.5) * 3,
+        life: 70,
+        color: `hsl(${Math.random() * 360},100%,60%)`
+      });
+    }
+  }, 800);
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  sparks.forEach((s, k) => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = s.color;
+    ctx.fill();
+    s.x += s.dx;
+    s.y += s.dy;
+    s.life--;
+    if (s.life <= 0) sparks.splice(k, 1);
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
